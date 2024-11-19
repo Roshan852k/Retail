@@ -37,4 +37,23 @@ public class ProductService {
         return mapper.toProductResponse(product);
     }
 
+    public String updateProductPrice(String name, Integer newPrice) {
+        Product product = repo.findByName(name)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found with name: " + name));
+        product.setPrice(newPrice);
+        repo.save(product);
+
+        return "Product Price Updated successfully";
+    }
+
+    public String deleteProductByName(String name) {
+        Product product = repo.findByName(name).get();
+        if (product != null) {
+            repo.delete(product);
+            return "Product deleted successfully";
+        } else {
+            return "Product not found";
+        }
+    }
+
 }
