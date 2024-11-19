@@ -2,13 +2,11 @@ package com.roshan.retail.controller;
 
 
 import com.roshan.retail.dto.ProductRequest;
+import com.roshan.retail.dto.ProductResponse;
 import com.roshan.retail.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,6 +17,11 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<String> addProduct(@RequestBody ProductRequest request) {
         return ResponseEntity.ok(productService.addProduct(request));
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<ProductResponse> getCustomer(@PathVariable("name") String name) {
+        return ResponseEntity.ok(productService.retrieveProduct(name));
     }
 
 }
