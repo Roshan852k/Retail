@@ -3,11 +3,15 @@ package com.roshan.retail.controller;
 
 import com.roshan.retail.dto.ProductRequest;
 import com.roshan.retail.dto.ProductResponse;
+import com.roshan.retail.entity.Product;
 import com.roshan.retail.service.ProductService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,5 +37,11 @@ public class ProductController {
     @PutMapping("/update")
     public ResponseEntity<String> updateProductPrice(@RequestParam String name, @RequestParam Integer newprice) {
         return ResponseEntity.ok(productService.updateProductPrice(name, newprice));
+    }
+
+    @GetMapping("/top2InPriceRange")
+    public ResponseEntity<List<Product>> getTop2Product() {
+        List<Product> products = productService.getTop2Product();
+        return ResponseEntity.ok(products);
     }
 }

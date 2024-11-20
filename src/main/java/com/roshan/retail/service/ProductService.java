@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
+import java.util.List;
 
 
 @Service
@@ -54,6 +55,10 @@ public class ProductService {
         } else {
             return "Product not found";
         }
+    }
+
+     public List<Product> getTop2Product() {
+        return repo.getTop2Product();
     }
 
 }
